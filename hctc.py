@@ -46,6 +46,8 @@ class HuangChangTiCou:
             self.map_dict = json.load(f)
         # 随机生成食物分布
         self.random_food()
+        # 随机生成弹药分布
+        self.random_ammo()
         # 创建房间名称字典，用于自定义人物位置
         self.room_name_dict = {}
         for k, v in self.map_dict.items():
@@ -67,6 +69,10 @@ class HuangChangTiCou:
 
 
     def create_map(self):
+        """
+        创建地图
+        :return:
+        """
         map = np.zeros((1200, 1200, 3), np.uint8)
 
         for i in [1, 2, 4, 5]:
@@ -76,7 +82,10 @@ class HuangChangTiCou:
         return map
 
     def load_head_pic(self):
-
+        """
+        加载头像数据
+        :return:
+        """
         img_root = 'data/head_pic'
         img_name_list = os.listdir(img_root)
         head_pic_dict = {}
@@ -91,13 +100,19 @@ class HuangChangTiCou:
 
 
     def show_map(self):
-
+        """
+        显示地图
+        :return:
+        """
         cv2.imshow('hctc', self.map)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
     def init_map(self):
-
+        """
+        初始化地图
+        :return:
+        """
         self.map = self.create_map()
         self.person_info = self.put_person_default()
 
@@ -152,14 +167,32 @@ class HuangChangTiCou:
         :return:
         """
         for key, value in self.map_dict.items():
-            if key == "(5, 1)":
+            if key == "(1, 5)":
                 food_num = 5 + random.choice([0, 0, 1, 1, 1, 2, 2, 3])
-            elif key == "(3.5, 3.5)":
+            elif key == "(3.5, 3.5)" or key == "(5, 1)":
                 food_num = 0
             else:
                 food_num = random.choice([0, 0, 1, 1, 1, 2, 2, 3])
 
             self.map_dict[key]["food"] = food_num
+
+    def random_ammo(self):
+        """
+        随机分配弹药
+        :return:
+        """
+        ammo_list = ['7.63', '11.43', '6.5', '8', '6.35']
+        ammo_type = random.choice(ammo_list)
+
+        for key, value in self.map_dict.items():
+            if key == "(6, 3.5)" or key == "(1, 3.5)":
+                ammo_num = 7 + random.choice([0, 0, 1, 1, 1, 2, 2, 3])
+            elif key == "(3.5, 3.5)":
+                ammo_num = 0
+            else:
+                ammo_num = random.choice([0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 7])
+
+            self.map_dict[key]["ammo"][ammo_type] = ammo_num
 
 
     def judge_meet(self):
@@ -466,6 +499,7 @@ class HuangChangTiCou:
         room_name = self.map_dict[index]["name"]
         room_color = self.map_dict[index]["color"]
         room_food = self.map_dict[index]["food"]
+        ammo_type, ammo_num = list(self.map_dict[index]["ammo"].items())[0]
         room_infos = self.map_dict[index]["info"]
         room_out = self.map_dict[index]["out"]
         room_in = self.map_dict[index]["in"]
@@ -485,9 +519,16 @@ class HuangChangTiCou:
         room = self.dc.putText(room, f'时间: {day}天{hour}时{minute}分', (550, 100), (255, 255, 255))
 
         line = 1
-        # 添加房间信息
-        room = self.dc.putText(room, f'{room_food}包食物', (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
-        line += 1
+
+        # 添加食物信息
+        if room_food != 0:
+            room = self.dc.putText(room, f'{room_food}包食物', (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
+            line += 1
+        # 添加弹药信息
+        if ammo_num != 0:
+            room = self.dc.putText(room, f'{ammo_num}发{ammo_type}mm', (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
+            line += 1
+        # 添加道具信息
         for room_info in room_infos:
             room = self.dc.putText(room, room_info, (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
             line += 1
