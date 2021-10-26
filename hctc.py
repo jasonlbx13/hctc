@@ -121,14 +121,14 @@ class HuangChangTiCou:
         设置默认的角色信息，对应位置、颜色、行动优先级
         """
         person_info = {}
-        person_info['兰'] = {'lc': [2, 6], 'color': (255, 255, 0), 'order': 0, 'healthy': 8, 'chi': 8, 'energy': 9, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['驳壳枪'], 'item': ['古钱币*3', '刘寄奴', '钩吻', '景天', '王不留行'], 'ability': ['六爻（辨吉凶、分阴阳）', '叶底藏花', '包扎', '远程冷兵加成'], 'gua': '乾'}
-        person_info['柳舒之'] = {'lc': [1, 1], 'color': (0, 0, 255), 'order': 5, 'healthy': 7, 'chi': 8, 'energy': 11, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['奇门擎天伞'], 'item': ['急救包（针筒，手术刀）', '小药箱（亚硝酸钠，硫代硫酸钠，氯化钾，肾上腺素，好伤药*2）'], 'ability': ['急救', '注射', '药剂加成'], 'gua': '离'}
-        person_info['柳悦己'] = {'lc': [1, 6], 'color': (255, 0, 0), 'order': 7, 'healthy': 6, 'chi': 8, 'energy': 12, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['奇门纳地伞'], 'item': ['《奇门密要》'], 'ability': ['奇门遁甲(排盘，解卦)', '长枪及飞刀加成', '身法'], 'gua': '兑'}
-        person_info['刘钥'] = {'lc': [3.5, 1], 'color': (0, 255, 255), 'order': 3, 'healthy': 8, 'chi': 8, 'energy': 9, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['吹管（画笔）'], 'item': ['梦蝶香', '忘忧散', '香包*2', '钢丝录音机', '古钱币*3', '清醒药*3', '麻痹散', '魅幽香'], 'ability': ['飞熊入梦', '香散加成'], 'gua': '坎'}
-        person_info['袁丛'] = {'lc': [6, 1], 'color': (128, 128, 128), 'order': 1, 'healthy': 9, 'chi': 8, 'energy': 8, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['相机(含击发器)'], 'item': ['新亚日报', '手表(坏的)'], 'ability': ['伪装看破', '对答如流', '枪械加成'], 'gua': '坤'}
-        person_info['袁星'] = {'lc': [6, 3.5], 'color': (150, 0, 100), 'order': 4, 'healthy': 12, 'chi': 8, 'energy': 5, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['消音M1911'], 'item': ['金针', '钢丝绳', '《军统电码本》', '手表'], 'ability': ['易容', '神枪手', '全兵器加成'], 'gua': '艮'}
-        person_info['陈必'] = {'lc': [1, 3.5], 'color': (0, 128, 255), 'order': 2, 'healthy': 10, 'chi': 8, 'energy': 3, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['阴阳宣花斧'], 'item': ['探阴爪', '《寻龙笔记》', '风水罗盘'], 'ability': ['耐毒体质', '近战冷兵加成'], 'gua': '震'}
-        person_info['李媛姗'] = {'lc': [3.5, 6], 'color': (255, 255, 255), 'order': 6, 'healthy': 6, 'chi': 8, 'energy': 12, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['折叠手枪'], 'item': ['手包', '《军统电码本》', '诗', '手表'], 'ability': ['梅花易数', '巧连神数', 'buff'], 'gua': '巽'}
+        person_info['兰'] = {'lc': [2, 6], 'color': (255, 255, 0), 'order': 0, 'healthy': 8, 'chi': 8, 'energy': 9, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['日94式'], 'item': ['古钱币*3', '刘寄奴', '钩吻', '景天', '王不留行'], 'ability': ['六爻（辨吉凶、分阴阳）', '叶底藏花', '包扎', '远程冷兵加成'], 'gua': '乾', 'blood': 0, 'poision': 0}
+        person_info['柳舒之'] = {'lc': [1, 1], 'color': (0, 0, 255), 'order': 5, 'healthy': 7, 'chi': 8, 'energy': 11, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['奇门擎天伞'], 'item': ['急救包（针筒，手术刀）', '小药箱（亚硝酸钠，硫代硫酸钠，氯化钾，肾上腺素，好伤药*2）'], 'ability': ['急救', '注射', '药剂加成'], 'gua': '离', 'blood': 0, 'poision': 0}
+        person_info['柳悦己'] = {'lc': [1, 6], 'color': (255, 0, 0), 'order': 7, 'healthy': 6, 'chi': 8, 'energy': 12, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['奇门纳地伞'], 'item': ['《奇门密要》'], 'ability': ['奇门遁甲(排盘，解卦)', '长枪及飞刀加成', '身法'], 'gua': '兑', 'blood': 0, 'poision': 0}
+        person_info['刘钥'] = {'lc': [3.5, 1], 'color': (0, 255, 255), 'order': 3, 'healthy': 8, 'chi': 8, 'energy': 9, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['吹管（画笔）', '驳壳枪'], 'item': ['梦蝶香', '忘忧散', '香包*2', '钢丝录音机', '古钱币*3', '清醒药*3', '麻痹散', '魅幽香'], 'ability': ['飞熊入梦', '香散加成'], 'gua': '坎', 'blood': 0, 'poision': 0}
+        person_info['袁丛'] = {'lc': [6, 1], 'color': (128, 128, 128), 'order': 1, 'healthy': 9, 'chi': 8, 'energy': 8, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['相机(含击发器)'], 'item': ['《时闻纪要》', '手表(坏的)', '证件'], 'ability': ['伪装看破', '对答如流', '察言观色', '枪械加成'], 'gua': '坤', 'blood': 0, 'poision': 0}
+        person_info['袁星'] = {'lc': [6, 3.5], 'color': (150, 0, 100), 'order': 4, 'healthy': 12, 'chi': 8, 'energy': 5, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['消音M1911'], 'item': ['金针', '钢丝绳', '《军统电码本》', '手表'], 'ability': ['易容', '神枪手', '全兵器加成'], 'gua': '艮', 'blood': 0, 'poision': 0}
+        person_info['陈必'] = {'lc': [1, 3.5], 'color': (0, 128, 255), 'order': 2, 'healthy': 10, 'chi': 8, 'energy': 3, 'time': (0, 0, 0), 'speed': 1, 'direction': None, 'weapon': ['阴阳宣花斧'], 'item': ['探阴爪', '《寻龙笔记》', '风水罗盘'], 'ability': ['耐毒体质', '近战冷兵加成'], 'gua': '震', 'blood': 0, 'poision': 0}
+        person_info['李媛姗'] = {'lc': [3.5, 6], 'color': (255, 255, 255), 'order': 6, 'healthy': 6, 'chi': 8, 'energy': 12, 'time': (0, 0, 0), 'speed': 0.5, 'direction': None, 'weapon': ['折叠手枪'], 'item': ['手包', '《军统电码本》', '诗', '手表'], 'ability': ['梅花易数', '巧连神数', 'buff'], 'gua': '巽', 'blood': 0, 'poision': 0}
 
         for k, v in person_info.items():
             cx = int(200 * (v['lc'][0] - 0.5))
@@ -264,7 +264,11 @@ class HuangChangTiCou:
         head_img = self.head_pic_dict[person]
         self.panel[y1 + 20:y1 + 20 + 2 * head_size, x1 + head_left:x1 + head_left + 2 * head_size, :] = head_img
         self.panel = self.dc.putText(self.panel, person, (x1 + head_left, y1 + 20 + 2 * head_size), (255, 255, 255), textSize=font_size)
-
+        # 放置状态
+        if self.person_info[person]['poision']:
+            self.panel = self.dc.putText(self.panel, '毒', (x1 + head_left + 160, y1 - 70 + 2 * head_size), (0, 255, 0), textSize=font_size)
+        if self.person_info[person]['blood']:
+            self.panel = self.dc.putText(self.panel, '血', (x1 + head_left + 160, y1 - 130 + 2 * head_size), (0, 0, 255), textSize=font_size)
         # 更新血量
         for i in range(healthy):
             cv2.rectangle(self.panel, (x1 + bar_left + (rw + x_gap) * i, y1 + y_gap),
@@ -492,6 +496,8 @@ class HuangChangTiCou:
         healthy = self.person_info[person_name]['healthy']
         chi = self.person_info[person_name]['chi']
         energy = self.person_info[person_name]['energy']
+        blood = self.person_info[person_name]['blood']
+        poision = self.person_info[person_name]['poision']
         index = str(tuple(lc))
         room = np.zeros((500, 800, 3), np.uint8)
 
@@ -514,6 +520,11 @@ class HuangChangTiCou:
         room = self.dc.putText(room, f'精血:  {healthy}', (600, 0), (255, 255, 255))
         room = self.dc.putText(room, f'气脉:  {chi}', (600, 30), (255, 255, 255))
         room = self.dc.putText(room, f'神识:  {energy}', (600, 60), (255, 255, 255))
+        if poision:
+            room = self.dc.putText(room, '毒', (720, 30), (0, 255, 0))
+        if blood:
+            room = self.dc.putText(room, '血', (750, 30), (0, 0, 255))
+        room = self.dc.putText(room, f'气脉:  {chi}', (600, 30), (255, 255, 255))
         # 添加时间
         day, hour, minute = self.person_info[person_name]['time']
         room = self.dc.putText(room, f'时间: {day}天{hour}时{minute}分', (550, 100), (255, 255, 255))
@@ -803,6 +814,30 @@ class HuangChangTiCou:
                     print (f'{person_name}: 当前房间无法向{direction}行进')
                     logging.info(f'{person_name}: 当前房间无法向{direction}行进')
                     continue
+            # 毒性buff
+            elif key == ord('p'):
+                old_state = self.person_info[person_name]['poision']
+                new_state = 1 - old_state
+                self.person_info[person_name]['poision'] = new_state
+                if new_state == 1:
+                    print (f'为{person_name}施加毒药')
+                    logging.info(f'为{person_name}施加毒药')
+                else:
+                    print (f'为{person_name}解毒')
+                    logging.info(f'为{person_name}解毒')
+                self.update_person_state()
+            # 流血buff
+            elif key == ord('b'):
+                old_state = self.person_info[person_name]['blood']
+                new_state = 1 - old_state
+                self.person_info[person_name]['blood'] = new_state
+                if new_state == 1:
+                    print (f'为{person_name}施加流血')
+                    logging.info(f'为{person_name}施加流血')
+                else:
+                    print (f'为{person_name}止血')
+                    logging.info(f'为{person_name}止血')
+                self.update_person_state()
             # 当前人物精气调整
             elif key == ord('='):
                 self.person_info[person_name]['healthy'] += 1
@@ -901,6 +936,7 @@ class HuangChangTiCou:
                 self.map = np.zeros((1200, 1200, 3), np.uint8)
             else:
                 self.update_person_info()
+            # 保存当前人物状态
             self.save_person_state()
             # cv2.imshow('hctc', self.map)
 
