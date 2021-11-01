@@ -28,6 +28,8 @@ class HuangChangTiCou:
         self.dc = DisplayChinese()
         # 隐藏地图界面开关
         self.hide = False
+        # 出宫模式
+        self.out = False
         # 加载头像
         self.head_pic_dict = self.load_head_pic()
         # 初始化地图
@@ -193,6 +195,21 @@ class HuangChangTiCou:
                 ammo_num = random.choice([0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 7])
 
             self.map_dict[key]["ammo"][ammo_type] = ammo_num
+
+    def random_guizi(self):
+        """
+        随机分配鬼子
+        :return:
+        """
+        for key, value in self.map_dict.items():
+            if key == "(1, 5)":
+                guizi_num = 5 + random.choice([0, 0, 1, 1, 1, 2, 2, 3])
+            elif key == "(3.5, 3.5)" or key == "(5, 1)":
+                guizi_num = 0
+            else:
+                guizi_num = random.choice([0, 0, 1, 1, 1, 2, 2, 3])
+
+            self.map_dict[key]["guizi"] = guizi_num
 
 
     def judge_meet(self):
@@ -505,6 +522,7 @@ class HuangChangTiCou:
         room_name = self.map_dict[index]["name"]
         room_color = self.map_dict[index]["color"]
         room_food = self.map_dict[index]["food"]
+        room_guizi = self.map_dict[index]["guizi"]
         ammo_type, ammo_num = list(self.map_dict[index]["ammo"].items())[0]
         room_infos = self.map_dict[index]["info"]
         room_out = self.map_dict[index]["out"]
@@ -515,6 +533,9 @@ class HuangChangTiCou:
         room = self.dc.putText(room, room_name, (50, 10), (255, 255, 255))
         # 添加当前人物姓名
         room = self.dc.putText(room, person_name, (350, 10), (255, 255, 255))
+        # 添加鬼子数量
+        if self.out:
+            room = self.dc.putText(room, f'{room_guizi}个鬼子', (315, 50), (255, 255, 255))
         # 添加状态
         cv2.circle(room, (550, 50), 15, person_color, 30)
         room = self.dc.putText(room, f'精血:  {healthy}', (600, 0), (255, 255, 255))
@@ -915,8 +936,17 @@ class HuangChangTiCou:
 
             # 隐藏/显示地图
             elif key == ord('h'):
-
                 self.hide = 1 - self.hide
+
+            # 出宫/入宫模式
+            elif key == ord('c'):
+                self.out = 1 - self.out
+                if self.out:
+                    # 随机分布鬼子
+                    self.random_guizi()
+                    print ('当前为出宫模式')
+                else:
+                    print ('当前为入宫模式')
 
             # 撤销操作,自动模式下不可撤销
             elif key == ord('z') and not self.auto:
