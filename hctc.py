@@ -50,6 +50,8 @@ class HuangChangTiCou:
         self.random_food()
         # 随机生成弹药分布
         self.random_ammo()
+        # 随机生成大洋分布
+        self.random_money()
         # 创建房间名称字典，用于自定义人物位置
         self.room_name_dict = {}
         for k, v in self.map_dict.items():
@@ -202,14 +204,29 @@ class HuangChangTiCou:
         :return:
         """
         for key, value in self.map_dict.items():
-            if key == "(1, 5)":
-                guizi_num = 5 + random.choice([0, 0, 1, 1, 1, 2, 2, 3])
-            elif key == "(3.5, 3.5)" or key == "(5, 1)":
+            if key == "(6, 6)":
+                guizi_num = 2 + random.choice([0, 0, 1, 1, 1, 2, 2, 3])
+            elif key == "(3.5, 3.5)" or key == "(5, 1)" or key == "(2, 5)":
                 guizi_num = 0
             else:
-                guizi_num = random.choice([0, 0, 1, 1, 1, 2, 2, 3])
+                guizi_num = random.choice([0, 0, 1, 1, 2, 2, 3, 3])
 
             self.map_dict[key]["guizi"] = guizi_num
+
+    def random_money(self):
+        """
+        随机分配大洋
+        :return:
+        """
+        for key, value in self.map_dict.items():
+            if key == "(1, 2)":
+                money_num = 5 + random.choice([0, 0, 1, 1, 1, 2, 2, 3, 5])
+            elif key == "(3.5, 3.5)" or key == "(5, 1)":
+                money_num = 0
+            else:
+                money_num = random.choice([0, 1, 1, 2, 2, 3, 3, 5])
+
+            self.map_dict[key]["money"] = money_num
 
 
     def judge_meet(self):
@@ -523,6 +540,7 @@ class HuangChangTiCou:
         room_color = self.map_dict[index]["color"]
         room_food = self.map_dict[index]["food"]
         room_guizi = self.map_dict[index]["guizi"]
+        room_money = self.map_dict[index]["money"]
         ammo_type, ammo_num = list(self.map_dict[index]["ammo"].items())[0]
         room_infos = self.map_dict[index]["info"]
         room_out = self.map_dict[index]["out"]
@@ -554,15 +572,19 @@ class HuangChangTiCou:
 
         # 添加食物信息
         if room_food != 0:
-            room = self.dc.putText(room, f'{room_food}包食物', (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
+            room = self.dc.putText(room, f'{room_food}包食物', (550, 110 + 45 * line), (255, 255, 255), textSize=30, align='center')
             line += 1
         # 添加弹药信息
         if ammo_num != 0:
-            room = self.dc.putText(room, f'{ammo_num}发{ammo_type}mm', (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
+            room = self.dc.putText(room, f'{ammo_num}发{ammo_type}mm子弹', (550, 110 + 45 * line), (255, 255, 255), textSize=30, align='center')
+            line += 1
+        # 添加大洋信息
+        if room_money != 0:
+            room = self.dc.putText(room, f'{room_money}枚大洋', (550, 110 + 45 * line), (255, 255, 255), textSize=30, align='center')
             line += 1
         # 添加道具信息
         for room_info in room_infos:
-            room = self.dc.putText(room, room_info, (550, 75 + 75 * line), (255, 255, 255), textSize=50, align='center')
+            room = self.dc.putText(room, room_info, (550, 110 + 45 * line), (255, 255, 255), textSize=30, align='center')
             line += 1
         # 添加出口信息
         if len(room_out) > 0:
