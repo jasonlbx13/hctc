@@ -52,6 +52,10 @@ class HuangChangTiCou:
         self.random_ammo()
         # 随机生成大洋分布
         self.random_money()
+        # 随机生成宝箱分布
+        self.random_box()
+        # 随机生成谜题分布
+        self.random_puzzle()
         # 创建房间名称字典，用于自定义人物位置
         self.room_name_dict = {}
         for k, v in self.map_dict.items():
@@ -180,6 +184,21 @@ class HuangChangTiCou:
 
             self.map_dict[key]["food"] = food_num
 
+    def random_box(self):
+        """
+        随机分配宝箱
+        :return:
+        """
+        for key, value in self.map_dict.items():
+            if key == "(1, 5)":
+                box_level = 1 + random.choice([0, 1, 1, 1, 2, 2])
+            elif key == "(3.5, 3.5)" or key == "(5, 1)":
+                box_level = 0
+            else:
+                box_level = random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 3])
+
+            self.map_dict[key]["box"] = box_level
+
     def random_ammo(self):
         """
         随机分配弹药
@@ -197,6 +216,30 @@ class HuangChangTiCou:
                 ammo_num = random.choice([0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 7])
 
             self.map_dict[key]["ammo"][ammo_type] = ammo_num
+
+    def random_puzzle(self):
+        """
+        随机分配谜题机关
+        :return:
+        """
+        puzzle_num_list = list(range(1, 21))
+        for key, value in self.map_dict.items():
+            if key == "(3.5, 3.5)" or key == "(5, 1)":
+                puzzle_num = 0
+                self.map_dict[key]["puzzle_num"] = puzzle_num
+            elif key == "(3.5, 5)":
+                puzzle_num = 1
+                self.map_dict[key]["puzzle_num"] = puzzle_num
+            else:
+                if puzzle_num_list != []:
+                    prob = random.random()
+                    if prob > 0.3:
+                        puzzle_num = random.choice(puzzle_num_list)
+                        puzzle_num_list.remove(puzzle_num)
+                        self.map_dict[key]["puzzle_num"] = puzzle_num
+
+
+
 
     def random_guizi(self):
         """
@@ -541,6 +584,8 @@ class HuangChangTiCou:
         room_food = self.map_dict[index]["food"]
         room_guizi = self.map_dict[index]["guizi"]
         room_money = self.map_dict[index]["money"]
+        room_box = self.map_dict[index]["box"]
+        room_puzzle = self.map_dict[index]["puzzle_num"]
         ammo_type, ammo_num = list(self.map_dict[index]["ammo"].items())[0]
         room_infos = self.map_dict[index]["info"]
         room_out = self.map_dict[index]["out"]
@@ -552,8 +597,15 @@ class HuangChangTiCou:
         # 添加当前人物姓名
         room = self.dc.putText(room, person_name, (350, 10), (255, 255, 255))
         # 添加鬼子数量
-        if self.out:
+        if self.out and room_guizi != 0:
             room = self.dc.putText(room, f'{room_guizi}个鬼子', (315, 50), (255, 255, 255))
+        # 添加宝箱信息
+        if not self.out and room_box != 0:
+            level_list = ['空', '小', '中', '大']
+            room = self.dc.putText(room, f'{level_list[room_box]}宝箱', (315, 50), (255, 255, 255))
+        # 添加谜题机关信息
+        if not self.out and room_puzzle != 0:
+            room = self.dc.putText(room, f'{room_puzzle}号谜题', (310, 80), (255, 255, 255))
         # 添加状态
         cv2.circle(room, (550, 50), 15, person_color, 30)
         room = self.dc.putText(room, f'精血:  {healthy}', (600, 0), (255, 255, 255))
